@@ -1,7 +1,7 @@
 /**
  * ----------------------------------------------------------------------------
  * Autor: Kaue de Matos
- * Empresa: Nova Software
+ * Empresa: Nine
  * Propriedade da Empresa: Todos os direitos reservados
  * ----------------------------------------------------------------------------
  */
@@ -30,6 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("v1/auth")
 public class AuthenticateCustomerController {
+
     private AuthenticateCustomerUseCase customerLoginUseCase;
 
     @Autowired
@@ -44,7 +45,7 @@ public class AuthenticateCustomerController {
     public ResponseEntity<LoginResponseDTO> handle(@RequestBody LoginRequest loginRequest) throws Exception {
         try {
             Optional.ofNullable(loginRequest)
-                  .orElseThrow(() -> new IllegalArgumentException("Erro: dados de login não fornecidos"));
+                    .orElseThrow(() -> new IllegalArgumentException("Erro: dados de login não fornecidos"));
             return customerLoginUseCase.execute(loginRequest);
         } catch (CustomerNotFoundException ex) {
             log.error("Usuario não encontrado", ex);

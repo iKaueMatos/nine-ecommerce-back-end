@@ -1,7 +1,7 @@
 /**
  * ----------------------------------------------------------------------------
  * Autor: Kaue de Matos
- * Empresa: Nova Software
+ * Empresa: Nine
  * Propriedade da Empresa: Todos os direitos reservados
  * ----------------------------------------------------------------------------
  */
@@ -12,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder("Registration")
 public class RegistrationRequest {
 	private CustomerDTO customerDTO;
-	private CustomerAddressDTO customerAddressDTO;
 
 	public CustomerDTO getCustomerDTO() {
 		return customerDTO;
@@ -20,14 +19,6 @@ public class RegistrationRequest {
 
 	public void setcustomerDTO(CustomerDTO customerDTO) {
 		this.customerDTO = customerDTO;
-	}
-
-	public CustomerAddressDTO getCustomerAddressDTO() {
-		return customerAddressDTO;
-	}
-
-	public void setCustomerAddressDTO(CustomerAddressDTO customerAddressDTO) {
-		this.customerAddressDTO = customerAddressDTO;
 	}
 }
 

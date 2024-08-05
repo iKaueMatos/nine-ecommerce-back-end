@@ -1,7 +1,7 @@
 /**
  * ----------------------------------------------------------------------------
  * Autor: Kaue de Matos
- * Empresa: Nova Software
+ * Empresa: Nine
  * Propriedade da Empresa: Todos os direitos reservados
  * ----------------------------------------------------------------------------
  */
@@ -39,19 +39,6 @@ import lombok.extern.slf4j.Slf4j;
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler implements AuthenticationFailureHandler {
     private boolean printStackTrace = true;
     
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ResponseEntity<Object> handleAllUncaughtException(
-            Exception exception,
-            WebRequest request) {
-        final String errorMessage = "Unknown error occurred";
-        log.error(errorMessage, exception);
-        return buildErrorResponse(
-                exception,
-                errorMessage,
-                HttpStatus.INTERNAL_SERVER_ERROR,
-                request);
-    }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     @ResponseStatus(HttpStatus.CONFLICT)

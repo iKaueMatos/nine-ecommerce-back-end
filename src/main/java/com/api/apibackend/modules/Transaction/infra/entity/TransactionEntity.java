@@ -1,7 +1,7 @@
 /**
  * ----------------------------------------------------------------------------
  * Autor: Kaue de Matos
- * Empresa: Nova Software
+ * Empresa: Nine
  * Propriedade da Empresa: Todos os direitos reservados
  * Entidade responsavel por gerenciar toda a parte de transações da aplicação confirmação de pagamento de um pedido
  * ----------------------------------------------------------------------------

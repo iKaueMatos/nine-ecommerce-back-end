@@ -1,7 +1,7 @@
 /**
  * ----------------------------------------------------------------------------
  * Autor: Kaue de Matos
- * Empresa: Nova Software
+ * Empresa: Nine
  * Propriedade da Empresa: Todos os direitos reservados
  * ----------------------------------------------------------------------------
  */
@@ -14,12 +14,10 @@ import org.springframework.http.ResponseEntity;
 
 import com.api.apibackend.modules.Auth.Application.DTOs.response.ResponseMessageDTO;
 import com.api.apibackend.modules.Auth.Domain.Enum.CustomGrantedAuthority;
-import com.api.apibackend.modules.Customer.Application.DTOs.registration.CustomerAddressDTO;
 import com.api.apibackend.modules.Customer.Application.DTOs.registration.CustomerDTO;
 
 public interface IAutheticationRegister {
-    ResponseEntity<ResponseMessageDTO> register(CustomerDTO customerDTO,
-            CustomerAddressDTO CustomerAddressDTO);
+    ResponseEntity<ResponseMessageDTO> register(CustomerDTO customerDTO);
 
     Set<CustomGrantedAuthority> convertRolesToCustomAuthorities(Set<CustomGrantedAuthority> roles);
 }

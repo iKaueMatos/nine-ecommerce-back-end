@@ -3,7 +3,7 @@ package com.api.apibackend.modules.ProductCategory.infra.persistence.entity;
 /**
  * ----------------------------------------------------------------------------
  * Autor: Kaue de Matos
- * Empresa: Nova Software
+ * Empresa: Nine
  * Propriedade da Empresa: Todos os direitos reservados
  * ----------------------------------------------------------------------------
  * Representa uma entidade de Produto dentro da categoria.

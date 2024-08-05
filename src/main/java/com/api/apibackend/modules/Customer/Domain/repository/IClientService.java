@@ -1,7 +1,7 @@
 /**
  * ----------------------------------------------------------------------------
  * Autor: Kaue de Matos
- * Empresa: Nova Software
+ * Empresa: Nine
  * Propriedade da Empresa: Todos os direitos reservados
  * ----------------------------------------------------------------------------
  */
@@ -23,5 +23,5 @@ public interface IClientService {
     ResponseEntity<ResponseMessageDTO> update(Long clientId, CustomerDTO updatedClient, CustomerAddressDTO updatedAddress);
     ResponseEntity<ResponseMessageDTO> delete(Long clientId);
     UserEntity getUser();
-    CustomerEntity getCustomer();
+    UserEntity getCustomer();
 }

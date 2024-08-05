@@ -1,7 +1,7 @@
 /**
  * ----------------------------------------------------------------------------
  * Autor: Kaue de Matos
- * Empresa: Nova Software
+ * Empresa: Nine
  * Propriedade da Empresa: Todos os direitos reservados
  * ----------------------------------------------------------------------------
  */
@@ -18,6 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.api.apibackend.modules.Auth.Infra.persistence.entity.UserEntity;
+import com.api.apibackend.modules.Auth.Infra.persistence.repository.UserRepository;
 import com.api.apibackend.modules.Customer.Application.DTOs.registration.CustomerAddressDTO;
 import com.api.apibackend.modules.Customer.Application.DTOs.registration.CustomerDTO;
 import com.api.apibackend.modules.Customer.Application.DTOs.response.ResponseMessageDTO;
@@ -32,6 +33,7 @@ import jakarta.transaction.Transactional;
 @Service
 public class CustomerService implements IClientService {
 	private CustomerRepository customerRepository;
+	private UserRepository userRepository;
 	private CustomerAddressRepository addressRepository;
 
 	@Autowired
@@ -96,21 +98,21 @@ public class CustomerService implements IClientService {
 
 			Optional<UserEntity> user = Optional
 			.ofNullable(Optional
-			.ofNullable(customerRepository.findByEmail(userName)).get().getUser());
+			.ofNullable(userRepository.findByEmail(userName)).get());
 
 			return user.get();
 	}
 
 	@Override
-	public CustomerEntity getCustomer() {
+	public UserEntity getCustomer() {
 			String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 			if (Objects.isNull(userName)) {
 					return null;
 			}
 
-			Optional<CustomerEntity> user = Optional
+			Optional<UserEntity> user = Optional
 			.ofNullable(Optional
-			.ofNullable(customerRepository.findByEmail(userName)).get());
+			.ofNullable(userRepository.findByEmail(userName)).get());
 
 			return user.get();
 	}

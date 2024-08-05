@@ -1,7 +1,7 @@
 /**
  * ----------------------------------------------------------------------------
  * Autor: Kaue de Matos
- * Empresa: Nova Software
+ * Empresa: Nine
  * Propriedade da Empresa: Todos os direitos reservados
  * ----------------------------------------------------------------------------
  */
@@ -30,12 +30,6 @@ public class SecurityConfig {
     @Autowired
     private UserDetailsService userDetailsService;
 
-    private static final String[] SWAGGER_LIST = {
-        "/swagger-ui/**",
-        "/api/swagger-ui/**",
-        "/swagger-resources/**",
-    };
-
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth, PasswordEncoder passwordEncoder) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
@@ -45,11 +39,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> {
-                auth.requestMatchers("v1/produto/**").permitAll()
-                    .requestMatchers("v1/auth/registrar/**").permitAll()
-                    .requestMatchers("v1/auth/valida/token").permitAll()
-                    .requestMatchers("/**").permitAll()
-                    .requestMatchers(SWAGGER_LIST);
+                auth.requestMatchers("/**").permitAll();
                 auth.anyRequest().authenticated();
             })
             .addFilterBefore(securityFilter, BasicAuthenticationFilter.class);

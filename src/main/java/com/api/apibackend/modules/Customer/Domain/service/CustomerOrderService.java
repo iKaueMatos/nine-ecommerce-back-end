@@ -1,7 +1,7 @@
 /**
  * ----------------------------------------------------------------------------
  * Autor: Kaue de Matos
- * Empresa: Nova Software
+ * Empresa: Nine
  * Propriedade da Empresa: Todos os direitos reservados
  * ----------------------------------------------------------------------------
  */
@@ -36,7 +36,6 @@ public class CustomerOrderService {
         
         CustomerEntity customerEntity = new CustomerEntity();
         customerEntity.setName(clientRequest.getName());
-        customerEntity.setEmail(clientRequest.getEmail());
         customerEntity.setAge(clientRequest.getAge());
         customerEntity.setCpf(clientRequest.getCpf());
         customerEntity.setGender(clientRequest.getGender());

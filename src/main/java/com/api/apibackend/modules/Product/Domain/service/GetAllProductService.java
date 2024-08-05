@@ -1,7 +1,7 @@
 /**
  * ----------------------------------------------------------------------------
  * Autor: Kaue de Matos
- * Empresa: Nova Software
+ * Empresa: Nine
  * Propriedade da Empresa: Todos os direitos reservados
  * ----------------------------------------------------------------------------
  */
@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import com.api.apibackend.core.redis.MyRedisCacheManager;
 import com.api.apibackend.modules.Midia.infra.persistence.entity.MidiaEntity;
 import com.api.apibackend.modules.Price.infra.entity.PriceEntity;
 import com.api.apibackend.modules.Product.Domain.model.Product;
@@ -25,7 +24,6 @@ import com.api.apibackend.modules.Stock.Infra.persistence.entity.StockEntity;
 @Service
 public class GetAllProductService implements IGetAllProductService {
     private ProductRepository productRepository;
-    private MyRedisCacheManager myRedisCacheManager;
     
     public GetAllProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;

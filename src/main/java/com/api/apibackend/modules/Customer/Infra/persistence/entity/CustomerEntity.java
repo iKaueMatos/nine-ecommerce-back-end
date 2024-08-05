@@ -1,7 +1,7 @@
 /**
  * ----------------------------------------------------------------------------
  * Autor: Kaue de Matos
- * Empresa: Nova Software
+ * Empresa: Nine
  * Propriedade da Empresa: Todos os direitos reservados
  * ----------------------------------------------------------------------------
  * Representa uma entidade de cliente dentro da empresa.
@@ -14,7 +14,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.api.apibackend.modules.Auth.Infra.persistence.entity.UserEntity;
-import com.api.apibackend.modules.Cart.Infra.persistence.entity.CartEntity;
 import com.api.apibackend.modules.Customer.Application.DTOs.registration.CustomerDTO;
 import com.api.apibackend.modules.CustomerAddress.Infra.persistence.entity.CustomerAddressEntity;
 import com.api.apibackend.modules.Order.infra.persistence.entity.OrderEntity;
@@ -141,12 +140,6 @@ public class CustomerEntity implements Serializable {
      */
     @Column(name = "data_nascimento")
     private Date birthDate;
-
-    /**
-     * Lista de carrinhos associados ao cliente.
-     */
-    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
-    private CartEntity cartEntity;
 
     public CustomerEntity(CustomerDTO customerDTO) {
         this.name = customerDTO.getName();

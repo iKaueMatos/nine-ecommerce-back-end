@@ -1,5 +1,7 @@
 package com.api.apibackend.shared.error;
 
+import java.io.IOException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.Ordered;
@@ -11,24 +13,16 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.servlet.NoHandlerFoundException;
 
 import com.api.apibackend.shared.error.exception.InvalidArgumentException;
 import com.api.apibackend.shared.error.exception.ResourceFetchException;
 import com.api.apibackend.shared.error.exception.ResourceNotFoundException;
-
-import java.io.IOException;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @RestControllerAdvice
 public class RestExceptionHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RestExceptionHandler.class);
-
-    @ExceptionHandler(NoHandlerFoundException.class)
-    public ResponseEntity<ApiError> handleError404(Exception e) {
-        return buildResponseEntity(new ApiError(HttpStatus.NOT_FOUND, "Requested resource does not exist", HttpStatus.NOT_FOUND.value()));
-    }
 
     @ExceptionHandler(IOException.class)
     public ResponseEntity<ApiError> handleIO(Exception e) {

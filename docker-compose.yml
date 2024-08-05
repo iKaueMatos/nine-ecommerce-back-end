@@ -1,9 +1,5 @@
 version: '3.2'
 
-networks:
-  gv-network:
-    driver: bridge
-
 services:
   mysql:
     container_name: nova-core-mysql
@@ -14,13 +10,4 @@ services:
       - MARIADB_DATABASE=novaecommerce
       - MARIADB_ROOT_USER=root
       - MARIADB_ROOT_PASSWORD=admin
-    networks:
-      - gv-network
 
-  redis:
-    container_name: nova-core-redis
-    image: redis:latest
-    ports:
-      - "6379:6379"
-    networks:
-      - gv-network

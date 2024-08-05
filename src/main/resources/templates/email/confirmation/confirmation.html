@@ -9,7 +9,7 @@
 </head>
 <body>
     <p>Olá, <span th:text="${user}">user</span></p>
-    <p>Obrigado por se cadastrar no site <strong th:text="${appName}">Nova Software</strong>!</p>
+    <p>Obrigado por se cadastrar no site <strong th:text="${appName}">Nine</strong>!</p>
     <p>Para ativar a sua conta, clique no link abaixo:</p>
     <p>
         <a href="<URL_da_página_de_confirmação>" th:href="@{${'URL_da_página_de_confirmação'}}" 
@@ -19,6 +19,6 @@
     </p>
     <p>Se o botão acima não funcionar, você também pode copiar e colar o seguinte link no seu navegador:</p>
     <p>${confirmationLink}</p>
-    <p>Atenciosamente,<br/>Equipe de Suporte <strong th:text="${appName}">Nova Software</strong></p>
+    <p>Atenciosamente,<br/>Equipe de Suporte <strong th:text="${appName}">Nine</strong></p>
 </body>
 </html>

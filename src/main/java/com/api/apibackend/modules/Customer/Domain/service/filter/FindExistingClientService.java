@@ -1,7 +1,7 @@
 /**
  * ----------------------------------------------------------------------------
  * Autor: Kaue de Matos
- * Empresa: Nova Software
+ * Empresa: Nine
  * Propriedade da Empresa: Todos os direitos reservados
  * ----------------------------------------------------------------------------
  */
@@ -29,7 +29,7 @@ public class FindExistingClientService {
         if (clientRequest != null) {
             String email = clientRequest.getEmail();
             if (email != null) {
-                Optional<CustomerEntity> existingClient = Optional.ofNullable(customerRepository.findByEmail(email));
+                Optional<CustomerEntity> existingClient = Optional.empty();
                 return existingClient.orElse(null);
             }
         }

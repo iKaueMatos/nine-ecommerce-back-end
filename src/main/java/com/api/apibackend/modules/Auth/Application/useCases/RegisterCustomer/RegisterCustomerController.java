@@ -1,7 +1,7 @@
 /**
  * ----------------------------------------------------------------------------
  * Autor: Kaue de Matos
- * Empresa: Nova Software
+ * Empresa: Nine
  * Propriedade da Empresa: Todos os direitos reservados
  * ----------------------------------------------------------------------------
  */
@@ -25,34 +25,44 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("v1/auth")
+@RequestMapping("/v1/auth")
 public class RegisterCustomerController {
-    private RegisterCustomerUseCase registerCustomerUseCase;
+
+    private static final String REGISTRATION_PATH = "/registrar";
+
+    private final RegisterCustomerUseCase registerCustomerUseCase;
 
     @Autowired
     public RegisterCustomerController(RegisterCustomerUseCase registerCustomerUseCase) {
         this.registerCustomerUseCase = registerCustomerUseCase;
     }
 
-    @PostMapping(path = "/registrar")
-    @Tag(name = "Registra um usuário", description = "Registra o usuário no banco e gera um token de acesso para o mesmo")
-    @Operation(summary = "Rota responsável por registrar o usuário e gerar um token de autenticação para o mesmo!")
+    @PostMapping(REGISTRATION_PATH)
+    @Tag(name = "Register", description = "Register a new user and generate an access token.")
+    @Operation(summary = "Register a new user and generate an authentication token.")
     public ResponseEntity<ResponseMessageDTO> handle(@RequestBody RegistrationRequest registrationRequest) {
         try {
-            return registerCustomerUseCase.execute(
-                    registrationRequest.getCustomerDTO(),
-                    registrationRequest.getCustomerAddressDTO());
+            if (registrationRequest == null || registrationRequest.getCustomerDTO() == null) {
+                log.warn("Requisição de registro inválida: {}", registrationRequest);
+                return ResponseEntity.badRequest()
+                        .body(new ResponseMessageDTO(null, getClass().getSimpleName(), "Dados de registro são obrigatórios.", null));
+            }
+
+            return registerCustomerUseCase.execute(registrationRequest.getCustomerDTO());
         } catch (IllegalArgumentException ex) {
-            return ResponseEntity.badRequest().body(
-                    new ResponseMessageDTO(null, this.getClass().getSimpleName(), ex.getMessage(), null));
+            log.warn("Erro de validação: {}", ex.getMessage());
+            return ResponseEntity.badRequest()
+                    .body(new ResponseMessageDTO(null, getClass().getSimpleName(), "Erro de validação: " + ex.getMessage(), null));
         } catch (RegistrationFailedException ex) {
+            log.error("Falha no registro: {}", ex.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseMessageDTO(null, this.getClass().getSimpleName(),
-                            "Erro ao processar a solicitação de registro: " + ex.getMessage(), null));
+                    .body(new ResponseMessageDTO(null, getClass().getSimpleName(),
+                            "Falha ao processar a solicitação de registro: " + ex.getMessage(), null));
         } catch (Exception ex) {
+            log.error("Erro inesperado ao processar a solicitação de registro: {}", ex.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseMessageDTO(null, this.getClass().getSimpleName(),
-                            "Erro inesperado ao processar a solicitação de registro: " + ex.getMessage(), null));
+                    .body(new ResponseMessageDTO(null, getClass().getSimpleName(),
+                            "Erro inesperado: " + ex.getMessage(), null));
         }
     }
 }

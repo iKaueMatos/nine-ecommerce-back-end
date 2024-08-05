@@ -1,7 +1,7 @@
 /**
  * ----------------------------------------------------------------------------
  * Autor: Kaue de Matos
- * Empresa: Nova Software
+ * Empresa: Nine
  * Propriedade da Empresa: Todos os direitos reservados
  * ----------------------------------------------------------------------------
  */
@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -34,22 +33,6 @@ public class CustomerFilterService {
     @Autowired
     public CustomerFilterService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
-    }
-
-    public Optional<CustomerEntity> searchClientByEmail(String email) {
-        Optional.ofNullable(customerRepository.findByEmail(email));
-        return Optional.empty();
-    }
-
-    public CustomerEntity findExistingClient(ClientRequest clientRequest) {
-        if (clientRequest != null) {
-            String email = clientRequest.getEmail();
-            if (email != null) {
-                Optional<CustomerEntity> existingClient = Optional.ofNullable(customerRepository.findByEmail(email));
-                return existingClient.orElse(null);
-            }
-        }
-        return null;
     }
 
     public List<CustomerEntity> findCustomersByFiltersMain(String name, String cpf, String lastName) {
@@ -141,5 +124,10 @@ public class CustomerFilterService {
 
     public List<CustomerEntity> getCustomersSortedByName(String sort) {
         return customerRepository.findAllByOrderByNameAsc();
+    }
+
+    public CustomerEntity findExistingClient(ClientRequest clientRequest) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findExistingClient'");
     }
 }

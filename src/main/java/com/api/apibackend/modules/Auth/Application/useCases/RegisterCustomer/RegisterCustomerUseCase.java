@@ -1,7 +1,7 @@
 /**
  * ----------------------------------------------------------------------------
  * Autor: Kaue de Matos
- * Empresa: Nova Software
+ * Empresa: Nine
  * Propriedade da Empresa: Todos os direitos reservados
  * ----------------------------------------------------------------------------
  */
@@ -15,30 +15,32 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.api.apibackend.modules.Auth.Application.DTOs.response.ResponseMessageDTO;
-import com.api.apibackend.modules.Auth.Domain.authentication.AutheticationRegisterService;
-import com.api.apibackend.modules.Customer.Application.DTOs.registration.CustomerAddressDTO;
+import com.api.apibackend.modules.Auth.Domain.authentication.AuthenticationRegisterService;
 import com.api.apibackend.modules.Customer.Application.DTOs.registration.CustomerDTO;
 
 @Service
 public class RegisterCustomerUseCase {
-    private AutheticationRegisterService autheticationRegister;
+    private AuthenticationRegisterService autheticationRegister;
 
     @Autowired
-    public RegisterCustomerUseCase(AutheticationRegisterService autheticationRegister) {
+    public RegisterCustomerUseCase(AuthenticationRegisterService autheticationRegister) {
         this.autheticationRegister = autheticationRegister;
     }
 
-    public ResponseEntity<ResponseMessageDTO> execute(CustomerDTO customerDTO, CustomerAddressDTO customerAddressDTO) {
+    public ResponseEntity<ResponseMessageDTO> execute(CustomerDTO customerDTO) {
         try {
             return Optional.ofNullable(customerDTO)
-                    .map(dto -> Optional.ofNullable(customerAddressDTO)
-                            .map(addressDTO -> autheticationRegister.register(dto, addressDTO))
-                            .filter(response -> response.getStatusCode() == HttpStatus.CREATED)
-                            .orElseGet(() -> ResponseEntity.badRequest().body(new ResponseMessageDTO(
-                                    "Erro: dados de cliente ou endereço não fornecidos",
-                                    this.getClass().getSimpleName(), null, null))))
-                    .orElseThrow(
-                            () -> new IllegalArgumentException("Erro: dados de cliente ou endereço não fornecidos"));
+                    .map(dto -> {
+                        var response = autheticationRegister.register(dto);
+                        return response.getStatusCode() == HttpStatus.CREATED
+                                ? ResponseEntity.status(HttpStatus.CREATED).body(new ResponseMessageDTO(
+                                        "Cliente registrado com sucesso",
+                                        this.getClass().getSimpleName(), null, null))
+                                : ResponseEntity.badRequest().body(new ResponseMessageDTO(
+                                        "Erro: dados de cliente não fornecidos",
+                                        this.getClass().getSimpleName(), null, null));
+                    })
+                    .orElseThrow(() -> new IllegalArgumentException("Erro: dados de cliente não fornecidos"));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ResponseMessageDTO(null, this.getClass().getSimpleName(),
