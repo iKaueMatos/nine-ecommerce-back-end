@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +31,6 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("v1/auth")
 public class AuthenticateCustomerController {
-
     private AuthenticateCustomerUseCase customerLoginUseCase;
 
     @Autowired
@@ -42,7 +42,7 @@ public class AuthenticateCustomerController {
     @PreAuthorize("hasRole('USER')")
     @Tag(name = "Login do usuariuo", description = "Informações de login do usuário")
     @Operation(summary = "Rota responsavel por efetuar o login de um usuario dentro da aplicação, desta forma disponibilazando que ele tenha acesso as outras paginas!")
-    public ResponseEntity<LoginResponseDTO> handle(@RequestBody LoginRequest loginRequest) throws Exception {
+    public ResponseEntity<LoginResponseDTO> handle(@RequestBody @Validated LoginRequest loginRequest) throws Exception {
         try {
             Optional.ofNullable(loginRequest)
                     .orElseThrow(() -> new IllegalArgumentException("Erro: dados de login não fornecidos"));

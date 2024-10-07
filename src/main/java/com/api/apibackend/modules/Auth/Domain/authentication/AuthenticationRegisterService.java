@@ -93,7 +93,7 @@ public class AuthenticationRegisterService implements IAutheticationRegister {
             }
 
             return ResponseEntity.badRequest().body(new ResponseMessageDTO(
-                    errorMessage, this.getClass().getSimpleName(), null, null));
+                    "Erro de validação", this.getClass().getSimpleName(), errorMessage, null));
         }
             if (userRepository.findByEmail(customerDTO.getEmail()) != null) {
                 log.warn("Cliente já existe {}", customerDTO.getEmail());

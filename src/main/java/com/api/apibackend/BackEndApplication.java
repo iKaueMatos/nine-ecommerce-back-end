@@ -27,8 +27,8 @@ import jakarta.validation.Validation;
 @SpringBootApplication
 @OpenAPIDefinition(
     info = @Info(
-        title = "Nova Core",
-        description = "API principal do Nova Core responsavel pela entrada de pedidos dentro aplicação chamada de serviços externos da propria Nine caso necessário",
+        title = "Nine",
+        description = "API principal do Nine responsavel pela entrada de pedidos dentro aplicação chamada de serviços externos da propria Nine caso necessário",
         version = "1.0.1"
     )
 )

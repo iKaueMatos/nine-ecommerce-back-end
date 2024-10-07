@@ -32,7 +32,7 @@ public class RestExceptionHandler {
 
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<ApiError> handleAccessDenied(Exception e) {
-        return buildResponseEntity(new ApiError(HttpStatus.UNAUTHORIZED, "Access denied.", HttpStatus.UNAUTHORIZED.value()));
+        return buildResponseEntity(new ApiError(HttpStatus.UNAUTHORIZED, "Acesso negado.", HttpStatus.UNAUTHORIZED.value()));
     }
 
     @ExceptionHandler(InvalidArgumentException.class)

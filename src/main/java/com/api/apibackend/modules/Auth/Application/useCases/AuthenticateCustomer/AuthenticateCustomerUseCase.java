@@ -16,8 +16,6 @@ import com.api.apibackend.modules.Auth.Application.DTOs.request.LoginRequest;
 import com.api.apibackend.modules.Auth.Application.DTOs.response.LoginResponseDTO;
 import com.api.apibackend.modules.Auth.Domain.authentication.AuthorizationLoginService;
 
-import lombok.extern.slf4j.Slf4j;
-
 @Service
 public class AuthenticateCustomerUseCase {
     private final AuthorizationLoginService authenticationLogin;

@@ -27,7 +27,7 @@ public class ValidationResetPasswordUseCase {
     public ValidationResetPasswordUseCase(ResetPasswordValidateService resetPasswordValidateService) {
         this.resetPasswordValidateService = resetPasswordValidateService;
     }
-    
+
     public ResponseEntity<ResponseMessageDTO> execute(TokenResetPasswordDTO tokenResetPasswordDTO) {
         try {
             boolean isValidToken = resetPasswordValidateService.validateToken(tokenResetPasswordDTO);
@@ -36,7 +36,7 @@ public class ValidationResetPasswordUseCase {
                 log.info("token infomado valido : {}");
                 return ResponseEntity.ok(new ResponseMessageDTO("token válido", this.getClass().getName(), null, null));
             }
-            
+
             log.info("Token informado inválido : {}");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(new ResponseMessageDTO(null, this.getClass().getSimpleName(),

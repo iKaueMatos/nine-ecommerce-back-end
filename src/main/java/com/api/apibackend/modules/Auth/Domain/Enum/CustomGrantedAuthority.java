@@ -14,8 +14,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum CustomGrantedAuthority implements GrantedAuthority {
-    ADMIN("ROLE_ADMIN"),
-    USER("ROLE_USER");
+    ADMIN("ADMIN"),
+    USER("USER");
 
     private final String authority;
 

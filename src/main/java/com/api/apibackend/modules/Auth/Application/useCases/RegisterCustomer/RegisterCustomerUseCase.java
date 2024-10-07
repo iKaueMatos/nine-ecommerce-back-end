@@ -35,10 +35,10 @@ public class RegisterCustomerUseCase {
                         return response.getStatusCode() == HttpStatus.CREATED
                                 ? ResponseEntity.status(HttpStatus.CREATED).body(new ResponseMessageDTO(
                                         "Cliente registrado com sucesso",
-                                        this.getClass().getSimpleName(), null, null))
+                                        this.getClass().getSimpleName(), null, response.getBody().getAccessToken()))
                                 : ResponseEntity.badRequest().body(new ResponseMessageDTO(
-                                        "Erro: dados de cliente não fornecidos",
-                                        this.getClass().getSimpleName(), null, null));
+                                        response.getBody().getMessage(),
+                                        this.getClass().getSimpleName(), response.getBody().getErrorMessage(), null));
                     })
                     .orElseThrow(() -> new IllegalArgumentException("Erro: dados de cliente não fornecidos"));
         } catch (Exception e) {
