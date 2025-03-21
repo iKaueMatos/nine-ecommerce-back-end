@@ -13,31 +13,12 @@ Este é o repositório do back-end do projeto **Nine**, uma aplicação de e-com
   - CRUD (Create, Read, Update, Delete) de produtos.
   - Suporte a categorias e filtros de busca.
 
-## Estrutura do Projeto
-
-O projeto segue a estrutura padrão do Spring Boot:
-
-```
-src/
-├── main/
-│   ├── java/
-│   │   └── com.example.ninebackend/
-│   │       ├── controller/    # Controladores REST
-│   │       ├── service/       # Lógica de negócios
-│   │       ├── repository/    # Interfaces de acesso ao banco de dados
-│   │       └── model/         # Entidades do banco de dados
-│   └── resources/
-│       ├── application.properties  # Configurações do Spring Boot
-│       └── static/                 # Arquivos estáticos (se aplicável)
-└── test/                           # Testes automatizados
-```
-
 ## Como Executar
 
 1. **Clone o repositório**:
 
    ```bash
-   git clone https://github.com/seu-usuario/nine-back-end.git
+   git clone https://github.com/seu-usuario/nine-ecommerce-back-end.git
    ```
 2. **Configure o banco de dados**:
 
